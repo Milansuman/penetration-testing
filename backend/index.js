@@ -1,8 +1,10 @@
 var express=require('express');
 require('./connection');
 var model=require('./model/ingredient');
+var cors = require('cors')
 
 var app=express();
+app.use(cors())
 app.use(express.json());
 
 
