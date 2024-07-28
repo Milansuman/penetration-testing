@@ -16,6 +16,9 @@ const Navbar = () => {
                 <Button variant='text'>
                 <Link style={{textDecoration:'none', color:'white'}}  to={'/add'}>Add</Link>
                 </Button>
+                <Button variant='text'>
+                <Link style={{textDecoration:'none', color:'white'}}  to={'/a'}>Admin</Link>
+                </Button>
             </Toolbar>
         </AppBar>
         </Box>
