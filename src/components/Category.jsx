@@ -1,11 +1,9 @@
-import { Button, Card, CardActions, CardContent, CardMedia, Grid, Typography } from '@mui/material'
-import axios from 'axios';
+import { Card, CardContent, CardMedia, Grid, Typography } from '@mui/material'
+import axios from 'axios'
 import React, { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom';
 
-const Admin = () => {
-    var navigate = useNavigate();
-  var[recipe, setRecipe] = useState([])
+const Category = () => {
+    var[recipe, setRecipe] = useState([])
   useEffect (()=>{
     axios.get('http://localhost:3004/view').then((response)=>{
     console.log(response);
@@ -14,21 +12,9 @@ const Admin = () => {
       console.log(error)
     })
   },[])
-
-  const deleteIngredient = (id)=>{
-    console.log(id)
-    axios.delete('http://localhost:3004/remove/'+id).then((response)=>{
-    console.log(response);
-    window.location.reload(true);
-    }).catch((error)=>{
-      console.log(error);
-    })
-  }
-
-
   return (
-    <div id='admin' style={{marginTop:'10%'}}>
-       <Grid justifyContent={"flex-start"} container spacing={2}>
+    <div style={{marginTop:'9%'}}>
+        <Grid justifyContent={"flex-start"} container spacing={2}>
         {recipe.map((data)=>{
           return(
             <Grid key = {data.id} item xs={6} md={3}>
@@ -48,20 +34,16 @@ const Admin = () => {
                 <Typography variant="body2">
                   Ingredients : {data.ingredients}<br/>
                   Categories : {data.categories}
-                  
                 </Typography>
               </CardContent>
-              <CardActions>
-                <Button size="small" onClick={()=>{deleteIngredient(data._id)}} variant="contained" id="deleteButton">Delete</Button>
-              </CardActions>
             </Card>
             </Grid>
             
           )
         })}
-      </Grid> 
+      </Grid>
     </div>
   )
 }
 
-export default Admin
+export default Category

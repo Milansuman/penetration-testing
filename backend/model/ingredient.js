@@ -4,7 +4,8 @@ var ingredient_schema=mongoose.Schema({
     recipeName : String,
     ingredients : String,
     instructions : String,
-    img : String
+    img : String,
+    categories:String
 
 });
 var ingreModel=mongoose.model("ingredient",ingredient_schema);

@@ -50,6 +50,7 @@ const Home = () => {
                 </Typography>
                 <Typography variant="body2">
                   Ingredients : {data.ingredients}<br/>
+                  Categories : {data.categories}
                 </Typography>
               </CardContent>
               <CardActions>
