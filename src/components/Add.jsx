@@ -1,4 +1,4 @@
-import { TextField, Grid, Button } from "@mui/material"
+import { Box,Paper,TextField, Grid, Button, Typography } from "@mui/material"
 import './Add.css'
 import { useState, useEffect } from "react"
 import { useNavigate, useLocation } from "react-router-dom"
@@ -44,8 +44,21 @@ const Add = () => {
     <div>
         <div className="divadd">
         <br />
-        <Grid justifyContent={"center"} container spacing={2}>
-        <Grid item xs={8} md={4}>
+        <Box justifyContent={'center'}
+            sx={{
+                display: 'flex',
+                flexWrap: 'wrap',
+                '& > :not(style)': {
+                  m: 1,
+                  width: 612,
+                  height: 512,
+                },
+              }}
+        >
+        <Paper style={{paddingTop:'5%'}} elevation={3}>
+        <Typography align="center" style={{textDecorationThickness:'10%'}} variant="h3">Add Recipe</Typography>
+        <Grid style={{paddingTop:'5%'}} justifyContent={"center"} container spacing={2}>
+        <Grid item xs={8} md={6}>
             <TextField required fullWidth variant='outlined' label='Name of the Recipe' 
             onChange={inputHandler} name ='recipeName' value = {(recipe.recipeName)}/> <br /> <br />
             <TextField multiline required fullWidth variant='outlined' label='Ingredients'
@@ -57,6 +70,8 @@ const Add = () => {
             <Button style={{marginTop:'10%'} }fullWidth id ='submitButton' variant="contained" onClick={submit}>Submit</Button>
         </Grid>
         </Grid>
+        </Paper>
+        </Box>
         </div>
     </div>
   )
