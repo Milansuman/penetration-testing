@@ -11,10 +11,10 @@ const Add = () => {
     console.log(location.state)
     console.log('useEffect')
     console.log(recipe)
-    var[recipe, setRecipe] = useState({recipeName:"", ingredients :"", instructions :"", image : ""})
+    var[recipe, setRecipe] = useState({recipeName:"", ingredients :"", instructions :"", image : "",categories:""})
     useEffect(()=>{
       if(location.state != null){
-        setRecipe({...recipe,recipeName: location.state.val.recipeName, ingredients:location.state.val.ingredients, instructions : location.state.val.instructions, img: location.state.val.img})
+        setRecipe({...recipe,recipeName: location.state.val.recipeName, ingredients:location.state.val.ingredients, instructions : location.state.val.instructions, img: location.state.val.img,categories:location.state.val.categories})
       }
     },[])
     const inputHandler = (v)=>{
@@ -67,6 +67,8 @@ const Add = () => {
             onChange={inputHandler} name='instructions' value = {(recipe.instructions)}/><br /> <br />
             <TextField required fullWidth variant='outlined' type="url" label='Image'
             onChange={inputHandler} name='img' value = {(recipe.img)}/><br /> <br />
+            <TextField required fullWidth variant='outlined' type="outlined" label='categories'
+            onChange={inputHandler} name='categories' value = {(recipe.categories)}/><br /> <br />
             <Button style={{marginTop:'10%'} }fullWidth id ='submitButton' variant="contained" onClick={submit}>Submit</Button>
         </Grid>
         </Grid>

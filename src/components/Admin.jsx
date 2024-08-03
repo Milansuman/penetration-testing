@@ -1,11 +1,10 @@
-import React from 'react'
-import { Grid, Card, CardContent, Typography, CardActions, Button, CardMedia } from '@mui/material'
-import { useEffect, useState } from 'react';
+import { Button, Card, CardActions, CardContent, CardMedia, Grid, Typography } from '@mui/material'
 import axios from 'axios';
+import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
-import './Home.css'
-const Home = () => {
-  var navigate = useNavigate();
+
+const Admin = () => {
+    var navigate = useNavigate();
   var[recipe, setRecipe] = useState([])
   useEffect (()=>{
     axios.get('http://localhost:3004/view').then((response)=>{
@@ -14,9 +13,9 @@ const Home = () => {
     }).catch((error)=>{
       console.log(error)
     })
-  },[])  //variable in the dependency array will run the hook everytime the variable changes
+  },[])
 
-  const deleteStudent = (id)=>{
+  const deleteIngredient = (id)=>{
     console.log(id)
     axios.delete('http://localhost:3004/remove/'+id).then((response)=>{
     console.log(response);
@@ -25,13 +24,11 @@ const Home = () => {
       console.log(error);
     })
   }
-  const clickUpdate = (data)=>{
-    navigate('/add', {state :{val : data}})
-    console.log(data);
-  }
+
+
   return (
-    <div id = 'homeBackground'>
-      <Grid justifyContent={"flex-start"} container spacing={2}>
+    <div id='admin' style={{marginTop:'10%'}}>
+       <Grid justifyContent={"flex-start"} container spacing={2}>
         {recipe.map((data)=>{
           return(
             <Grid key = {data.id} item xs={6} md={3}>
@@ -51,20 +48,20 @@ const Home = () => {
                 <Typography variant="body2">
                   Ingredients : {data.ingredients}<br/>
                   Categories : {data.categories}
+                  
                 </Typography>
               </CardContent>
               <CardActions>
-                <Button id ="editButton" onClick={()=>{clickUpdate(data)}} variant="contained" size="small">Edit</Button>
-                <Button size="small" onClick={()=>{deleteStudent(data._id)}} variant="contained" id="deleteButton">Delete</Button>
+                <Button size="small" onClick={()=>{deleteIngredient(data._id)}} variant="contained" id="deleteButton">Delete</Button>
               </CardActions>
             </Card>
             </Grid>
             
           )
         })}
-      </Grid>
+      </Grid> 
     </div>
   )
 }
 
-export default Home
+export default Admin
