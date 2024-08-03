@@ -66,11 +66,32 @@ app.get('/view',async(req,res)=>{
     }
 });
 
+app.get('/viewusers',async(req,res)=>{
+    try {
+        var user =await logmodel.find();
+        res.send(user);
+    } catch (error) {
+        console.log(error);
+    }
+});
+
 //delete a documents
 app.delete('/remove/:id',async(req,res)=>{
     var id=req.params.id
     try {
         await ingmodel.findByIdAndDelete(id);
+        res.send("Deleted sucessfully")
+
+    } catch (error) {
+        console.log(error);
+        
+    }
+});
+app.delete('/removeuser/:username',async(req,res)=>{
+    var usrname=req.params.username
+    console.log(usrname)
+    try {
+        await logmodel.findOneAndDelete({username : usrname});
         res.send("Deleted sucessfully")
 
     } catch (error) {

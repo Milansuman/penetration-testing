@@ -4,7 +4,6 @@ import { useState, useEffect } from "react"
 import { useNavigate, useLocation } from "react-router-dom"
 import axios from "axios"
 const Add = () => {
-
     var navigate = useNavigate();
     var location = useLocation();
     console.log('location :')

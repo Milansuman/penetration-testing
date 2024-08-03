@@ -18,18 +18,15 @@ const Navbar = () => {
                 <Button variant='text'>
                 <Link style={{textDecoration:'none', color:'white'}}  to={'/add'}>Add</Link>
                 </Button>
-<<<<<<< HEAD
                 <IconButton onClick={()=>{navigate('/login')}}color='white' aria-label="Login">
                   <LoginIcon/>
                 </IconButton>
-=======
                 <Button variant='text'>
                 <Link style={{textDecoration:'none', color:'white'}}  to={'/a'}>Admin</Link>
                 </Button>
                 <Button variant='text'>
                 <Link style={{textDecoration:'none', color:'white'}}  to={'/c'}>categories</Link>
                 </Button>
->>>>>>> adish
             </Toolbar>
         </AppBar>
         </Box>
