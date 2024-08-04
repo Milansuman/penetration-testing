@@ -54,7 +54,7 @@ const Add = () => {
                 },
               }}
         >
-        <Paper style={{paddingTop:'2%'}} elevation={3}>
+        <Paper style={{paddingTop:'2%', overflow:'auto'}} elevation={3}>
         <Typography align="center" style={{textDecorationThickness:'10%'}} variant="h3">Add Recipe</Typography>
         <Grid style={{paddingTop:'3%'}} justifyContent={"center"} container spacing={2}>
         <Grid item xs={8} md={6}>
