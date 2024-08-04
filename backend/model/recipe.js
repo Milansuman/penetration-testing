@@ -1,6 +1,6 @@
 var mongoose =require('mongoose');
 
-var ingredient_schema=mongoose.Schema({
+var recipe_schema=mongoose.Schema({
     recipeName : String,
     ingredients : String,
     instructions : String,
@@ -8,5 +8,5 @@ var ingredient_schema=mongoose.Schema({
     categories:String
 
 });
-var ingreModel=mongoose.model("ingredient",ingredient_schema);
-module.exports=ingreModel;
+var recipeModel=mongoose.model("recipes",recipe_schema);
+module.exports=recipeModel;

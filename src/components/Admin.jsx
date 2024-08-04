@@ -89,11 +89,10 @@ const Admin = () => {
                 </Typography>
               </CardContent>
               <CardActions>
-                <Button size="small" onClick={()=>{deleteUsr(data.username)}} variant="contained" id="deleteButton">Delete</Button>
+                <Button size="small" onClick={()=>{deleteUsr(data._id)}} variant="contained" id="deleteButton">Delete</Button>
               </CardActions>
             </Card>
             </Grid>
-            
           )
         })}
       </Grid>

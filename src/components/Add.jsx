@@ -54,9 +54,9 @@ const Add = () => {
                 },
               }}
         >
-        <Paper style={{paddingTop:'5%'}} elevation={3}>
+        <Paper style={{paddingTop:'2%'}} elevation={3}>
         <Typography align="center" style={{textDecorationThickness:'10%'}} variant="h3">Add Recipe</Typography>
-        <Grid style={{paddingTop:'5%'}} justifyContent={"center"} container spacing={2}>
+        <Grid style={{paddingTop:'3%'}} justifyContent={"center"} container spacing={2}>
         <Grid item xs={8} md={6}>
             <TextField required fullWidth variant='outlined' label='Name of the Recipe' 
             onChange={inputHandler} name ='recipeName' value = {(recipe.recipeName)}/> <br /> <br />
@@ -68,7 +68,7 @@ const Add = () => {
             onChange={inputHandler} name='img' value = {(recipe.img)}/><br /> <br />
             <TextField required fullWidth variant='outlined' type="outlined" label='categories'
             onChange={inputHandler} name='categories' value = {(recipe.categories)}/><br /> <br />
-            <Button style={{marginTop:'10%'} }fullWidth id ='submitButton' variant="contained" onClick={submit}>Submit</Button>
+            <Button style={{marginTop:'.5%'} }fullWidth id ='submitButton' variant="contained" onClick={submit}>Submit</Button>
         </Grid>
         </Grid>
         </Paper>

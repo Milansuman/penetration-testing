@@ -1,10 +1,12 @@
 import React from 'react'
-import { Grid, Card, CardContent, Typography, CardActions, Button, CardMedia } from '@mui/material'
+import {ListItem,Box,List,ListItemText,ListItemButton,ListItemIcon, Grid, Card, CardContent, Typography, CardActions, Button, CardMedia, useStepContext } from '@mui/material'
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import './Home.css'
+
 const Home = () => {
+  var [activeUser, setActiveUser] = useState({id : null})
   var navigate = useNavigate();
   var[recipe, setRecipe] = useState([])
   useEffect (()=>{
@@ -53,10 +55,10 @@ const Home = () => {
                   Categories : {data.categories}
                 </Typography>
               </CardContent>
-              <CardActions>
+              {/* <CardActions>
                 <Button id ="editButton" onClick={()=>{clickUpdate(data)}} variant="contained" size="small">Edit</Button>
                 <Button size="small" onClick={()=>{deleteStudent(data._id)}} variant="contained" id="deleteButton">Delete</Button>
-              </CardActions>
+              </CardActions> */}
             </Card>
             </Grid>
             

@@ -1,6 +1,6 @@
 var express=require('express');
 require('./connection');
-var ingmodel=require('./model/ingredient');
+var recipeModel=require('./model/recipe');
 var logmodel=require('./model/user');
 var cors = require('cors')
 var bcrypt = require('bcrypt')
@@ -14,7 +14,7 @@ app.use(express.json());
 //to add data to db
 app.post('/add',async(req,res)=>{     
     try {
-        await ingmodel(req.body).save()
+        await recipeModel(req.body).save()
         res.send("data added")
     } catch (error) {
         console.log(error);
@@ -59,7 +59,7 @@ app.post('/login',async(req,res)=>{
 //to view api
 app.get('/view',async(req,res)=>{
     try {
-        var ingredient =await ingmodel.find();
+        var ingredient =await recipeModel.find();
         res.send(ingredient);
     } catch (error) {
         console.log(error);
@@ -79,7 +79,7 @@ app.get('/viewusers',async(req,res)=>{
 app.delete('/remove/:id',async(req,res)=>{
     var id=req.params.id
     try {
-        await ingmodel.findByIdAndDelete(id);
+        await recipeModel.findByIdAndDelete(id);
         res.send("Deleted sucessfully")
 
     } catch (error) {
@@ -87,11 +87,11 @@ app.delete('/remove/:id',async(req,res)=>{
         
     }
 });
-app.delete('/removeuser/:username',async(req,res)=>{
-    var usrname=req.params.username
-    console.log(usrname)
+app.delete('/removeuser/:id',async(req,res)=>{
+    var id=req.params.id
+    console.log(id)
     try {
-        await logmodel.findOneAndDelete({username : usrname});
+        await logmodel.findByIdAndDelete(id);
         res.send("Deleted sucessfully")
 
     } catch (error) {
@@ -105,7 +105,7 @@ app.delete('/removeuser/:username',async(req,res)=>{
 app.put('/edit/:id',async(req,res)=>{
     var id=req.params.id;
     try {
-        var ingredient=await ingmodel.findByIdAndUpdate(id,req.body);
+        await recipeModel.findByIdAndUpdate(id,req.body);
         res.send("update done")
     } catch (error) {
         console.log(error);
