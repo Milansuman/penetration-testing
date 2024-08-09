@@ -5,6 +5,7 @@ var logmodel=require('./model/user');
 var cors = require('cors')
 var bcrypt = require('bcrypt')
 
+
 var app=express();
 app.use(cors())
 app.use(express.json());
@@ -33,6 +34,25 @@ app.post('/createAccount',async(req,res)=>{
         console.log(error);
     }
 });
+
+app.get('/profile/:id',async(req,res)=>{  
+    try {
+        var prof = await logmodel.findById(req.params.id)
+        res.send(prof)
+    } catch (error) {
+        console.log(error);
+    }
+});
+
+app.put('/profileedit/:id',async(req,res)=>{  
+    try {
+        var prof = await logmodel.findByIdAndUpdate(req.params.id,req.body)
+        res.send(prof)
+    } catch (error) {
+        console.log(error);
+    }
+});
+
 app.post('/login',async(req,res)=>{
     var {username , password} = req.body;
     console.log(username)
@@ -47,6 +67,7 @@ app.post('/login',async(req,res)=>{
             return res.status(400).send("Invalid credentials Passwrd");
         }
         res.send({
+            _id: usr._id,
             fName : usr.fName,
             lName : usr.lName,
             username: usr.username,

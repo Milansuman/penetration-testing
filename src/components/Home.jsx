@@ -4,9 +4,10 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import './Home.css'
+import { UserProvider, useUser } from './UserContext';
 
 const Home = () => {
-  var [activeUser, setActiveUser] = useState({id : null})
+  const {user} = useUser();
   var navigate = useNavigate();
   var[recipe, setRecipe] = useState([])
   useEffect (()=>{
@@ -55,10 +56,14 @@ const Home = () => {
                   Categories : {data.categories}
                 </Typography>
               </CardContent>
-              {/* <CardActions>
-                <Button id ="editButton" onClick={()=>{clickUpdate(data)}} variant="contained" size="small">Edit</Button>
-                <Button size="small" onClick={()=>{deleteStudent(data._id)}} variant="contained" id="deleteButton">Delete</Button>
-              </CardActions> */}
+              {user ?(
+                  user.username == data.user ?(
+                    <CardActions>
+                      <Button id ="editButton" onClick={()=>{clickUpdate(data)}} variant="contained" size="small">Edit</Button>
+                      <Button size="small" onClick={()=>{deleteStudent(data._id)}} variant="contained" id="deleteButton">Delete</Button>
+                    </CardActions>
+                  ):null
+              ):null}
             </Card>
             </Grid>
             

@@ -3,22 +3,27 @@ import './Add.css'
 import { useState, useEffect } from "react"
 import { useNavigate, useLocation } from "react-router-dom"
 import axios from "axios"
+import { useUser } from './UserContext';
+
 const Add = () => {
+    const {user} = useUser();
     var navigate = useNavigate();
     var location = useLocation();
     console.log('location :')
     console.log(location.state)
     console.log('useEffect')
     console.log(recipe)
-    var[recipe, setRecipe] = useState({recipeName:"", ingredients :"", instructions :"", image : "",categories:""})
+    console.log(user)
+    var[recipe, setRecipe] = useState({recipeName:"", ingredients :"", instructions :"", img : "",categories:"",user:user.username})
     useEffect(()=>{
       if(location.state != null){
         setRecipe({...recipe,recipeName: location.state.val.recipeName, ingredients:location.state.val.ingredients, instructions : location.state.val.instructions, img: location.state.val.img,categories:location.state.val.categories})
       }
     },[])
     const inputHandler = (v)=>{
-        console.log(v)
+        console.log(v.target)
         setRecipe({...recipe,[v.target.name]:v.target.value})
+        console.log(recipe)
     }
 
     const submit = ()=>{
@@ -57,7 +62,7 @@ const Add = () => {
         <Paper style={{paddingTop:'2%', overflow:'auto'}} elevation={3}>
         <Typography align="center" style={{textDecorationThickness:'10%'}} variant="h3">Add Recipe</Typography>
         <Grid style={{paddingTop:'3%'}} justifyContent={"center"} container spacing={2}>
-        <Grid item xs={8} md={6}>
+        <Grid name = 'user' value = {(user.username)} item xs={8} md={6}>
             <TextField required fullWidth variant='outlined' label='Name of the Recipe' 
             onChange={inputHandler} name ='recipeName' value = {(recipe.recipeName)}/> <br /> <br />
             <TextField multiline required fullWidth variant='outlined' label='Ingredients'

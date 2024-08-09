@@ -18,12 +18,28 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import GroupIcon from '@mui/icons-material/Group';
 import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
+import { useUser } from './UserContext';
+
 const Admin = () => {
+  const {user} = useUser();
   const [openUsers, setopenUsers] = useState(true);
   const [showRecipes, setShowRecipes] = useState(false);
-  var [usrs, setUsrs] = useState([{fName:'',lName:'',username : ''}])
+  var [usrs, setUsrs] = useState([])
   var navigate = useNavigate();
   var[recipe, setRecipe] = useState([])
+  useEffect(() => {
+    if (!user) {
+      navigate('/login');
+      window.alert('Please log in to view this content!');
+      return;
+    }
+    if (user._id !== '66af3c474dc01b4ebd4c6a28') {
+      navigate('/');
+      window.alert('You do not have admin privileges!');
+      return;
+    }
+   }
+  )
   useEffect (()=>{
     axios.get('http://localhost:3004/view').then((response)=>{
     console.log(response);
@@ -90,6 +106,7 @@ const Admin = () => {
               </CardContent>
               <CardActions>
                 <Button size="small" onClick={()=>{deleteUsr(data._id)}} variant="contained" id="deleteButton">Delete</Button>
+                <Button size="small" onClick={()=>{navigate('/profile',{state:{val:data._id}})}} variant="contained" id="editButton">Edit</Button>
               </CardActions>
             </Card>
             </Grid>
@@ -134,30 +151,31 @@ const Admin = () => {
 
   return (
     <div id='admin' style={{marginTop:'7%'}}>
-       <Grid style={{marginTop:'5%'}} justifyContent={"flex-start"} container spacing={2}>
-        <Grid xs={6} md={3}>
-        <Box sx={{ width: 250 }}>
-          <List>
-            {['Users', 'Recipes'].map((text, index) => (
-              <ListItem key={text} disablePadding>
-                <ListItemButton onClick={() => handleListItemClick(index)}>
-                  <ListItemIcon>
-                    {index % 2 === 0 ? <GroupIcon /> : <FormatListBulletedIcon/>}
-                  </ListItemIcon>
-                  <ListItemText primary={text} />
-                </ListItemButton>
-              </ListItem>
-            ))}
-          </List>
-        </Box>
-        </Grid>
-        <Grid style={{marginTop:'1%'}} item xs={12} sm={6} md={9}>
-          {showRecipes && showRecipe}
-          {openUsers && showUsers}
-        </Grid>
-      </Grid> 
+    <Grid style={{marginTop:'5%'}} justifyContent={"flex-start"} container spacing={2}>
+    <Grid xs={6} md={3}>
+    <Box sx={{ width: 250 }}>
+      <List>
+        {['Users', 'Recipes'].map((text, index) => (
+          <ListItem key={text} disablePadding>
+            <ListItemButton onClick={() => handleListItemClick(index)}>
+              <ListItemIcon>
+                {index % 2 === 0 ? <GroupIcon /> : <FormatListBulletedIcon/>}
+              </ListItemIcon>
+              <ListItemText primary={text} />
+            </ListItemButton>
+          </ListItem>
+        ))}
+      </List>
+      </Box>
+      </Grid>
+      <Grid style={{marginTop:'1%'}} item xs={12} sm={6} md={9}>
+        {showRecipes && showRecipe}
+        {openUsers && showUsers}
+      </Grid>
+      </Grid>
     </div>
-  )
+  );
+
 }
 
 export default Admin

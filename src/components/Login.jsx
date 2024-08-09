@@ -4,25 +4,35 @@ import {Link,FormControlLabel,Checkbox,Grid, Avatar,Typography, Paper, Box, Text
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-
+import { useUser } from './UserContext';
 const Login = () => {
   var navigate = useNavigate();
   var [usr, setUsr] = useState({username : '', password : ''})
+  var [helperText, setHelperText] = useState(false);
+  var [error, setError] = useState(false);
+  const { user, setUser } = useUser();
   const inputHandler = (data)=>{
     console.log(data);
     setUsr({...usr,[data.target.name]: data.target.value})
   }
   const loginButton = ()=>{
     axios.post('http://localhost:3004/login',usr).then((res)=>{
-      console.log(res)
       if(res.data){
+        setError(false)
         window.alert('Logged in!')
-        navigate('/',{state:{val:res.data}})
+        setUser({ username: res.data.username , _id : res.data._id});
+        console.log(user)
+        navigate('/')
       }
       else{
         console.log("Error with res")
       }
-    }).catch((error)=>{console.log(error)});
+    }
+  ).catch((error)=>{
+    setError(true)
+    setHelperText('Wrong password or username')
+    console.log(error)
+  });
   }
   return (
     <div style={{padding:'20%'}}>
@@ -44,7 +54,7 @@ const Login = () => {
                     <TextField fullWidth variant='outlined' label='Username' 
                     onChange={inputHandler} name ='username' value = {(usr.username)}/>  <br /> <br />
                     <TextField fullWidth type='password' variant='outlined' label='Password' 
-                    onChange={inputHandler} name ='password' value = {(usr.password)}/> <br />
+                    onChange={inputHandler} error={error} helperText = {helperText} name ='password' value = {(usr.password)}/> <br />
                     <Typography style={{paddingTop:'5%', fontSize:'14px'}} align='left'>Don't have an account? <Link style={{textDecoration:'none'}} onClick={()=>{navigate('/signup')}}>sign up</Link></Typography><br />
                     <Button type='submit' fullWidth variant='contained' onClick={loginButton}>Login</Button>
                 </Grid> 
