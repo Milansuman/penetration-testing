@@ -57,7 +57,7 @@ const Home = () => {
                 </Typography>
               </CardContent>
               {user ?(
-                  user.username == data.user ?(
+                  user._id == data.userid ?(
                     <CardActions>
                       <Button id ="editButton" onClick={()=>{clickUpdate(data)}} variant="contained" size="small">Edit</Button>
                       <Button size="small" onClick={()=>{deleteStudent(data._id)}} variant="contained" id="deleteButton">Delete</Button>

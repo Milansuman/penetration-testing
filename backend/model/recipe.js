@@ -6,7 +6,7 @@ var recipe_schema=mongoose.Schema({
     instructions : String,
     img : String,
     categories:String,
-    user:String
+    userid:String
 
 });
 var recipeModel=mongoose.model("recipes",recipe_schema);

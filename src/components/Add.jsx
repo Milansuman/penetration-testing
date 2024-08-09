@@ -14,7 +14,7 @@ const Add = () => {
     console.log('useEffect')
     console.log(recipe)
     console.log(user)
-    var[recipe, setRecipe] = useState({recipeName:"", ingredients :"", instructions :"", img : "",categories:"",user:user.username})
+    var[recipe, setRecipe] = useState({recipeName:"", ingredients :"", instructions :"", img : "",categories:"",userid:user._id})
     useEffect(()=>{
       if(location.state != null){
         setRecipe({...recipe,recipeName: location.state.val.recipeName, ingredients:location.state.val.ingredients, instructions : location.state.val.instructions, img: location.state.val.img,categories:location.state.val.categories})
