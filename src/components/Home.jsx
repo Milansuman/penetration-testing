@@ -67,7 +67,6 @@ const Home = () => {
                   {data.recipeName}
                 </Typography>
                 <Typography variant="body2">
-                  Ingredients : {data.ingredients}<br/>
                   Categories : {data.categories}
                 </Typography>
               </CardContent>
@@ -89,6 +88,7 @@ const Home = () => {
               </ExpandMore>
               <Collapse in={expanded} timeout="auto" unmountOnExit>
                 <CardContent>
+                  <Typography paragraph>Ingredients : {data.ingredients} </Typography>
                   <Typography paragraph>Instructions:</Typography>
                   <Typography paragraph>
                     {data.instructions}
