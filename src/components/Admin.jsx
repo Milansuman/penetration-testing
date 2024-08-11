@@ -11,16 +11,33 @@ import {
   CardContent,
   CardMedia,
   Grid,
-  Typography 
+  Typography,
+  Collapse,
+  IconButton
 } from '@mui/material'
 import axios from 'axios';
+import { styled } from '@mui/material/styles';
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import GroupIcon from '@mui/icons-material/Group';
 import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
 import { useUser } from './UserContext';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+
+
+const ExpandMore = styled((props) => {
+  const { expand, ...other } = props;
+  return <IconButton {...other} />;
+})(({ theme, expand }) => ({
+  transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
+  marginLeft: 'auto',
+  transition: theme.transitions.create('transform', {
+    duration: theme.transitions.duration.shortest,
+  }),
+}));
 
 const Admin = () => {
+  const [expanded, setExpanded] = useState(false);
   const {user} = useUser();
   const [openUsers, setopenUsers] = useState(true);
   const [showRecipes, setShowRecipes] = useState(false);
@@ -66,8 +83,11 @@ const Admin = () => {
       console.log(error);
     })
   }
+  const handleExpandClick = () => {
+    setExpanded(!expanded);
+  };
 
-  const deleteIngredient = (id)=>{
+  const deleteRecipe = (id)=>{
     console.log(id)
     axios.delete('http://localhost:3004/remove/'+id).then((response)=>{
     console.log(response);
@@ -130,20 +150,32 @@ const Admin = () => {
                 <Typography variant="h5" component="div">
                   {data.recipeName}
                 </Typography>
-                <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                  {data.instructions}
-                </Typography>
                 <Typography variant="body2">
-                  Ingredients : {data.ingredients}<br/>
                   Categories : {data.categories}
                 </Typography>
               </CardContent>
-              <CardActions>
-                <Button size="small" onClick={()=>{deleteIngredient(data._id)}} variant="contained" id="deleteButton">Delete</Button>
-              </CardActions>
+                  <CardActions>
+                    <Button size="small" onClick={()=>{deleteRecipe(data._id)}} variant="contained" id="deleteButton">Delete</Button>
+                  </CardActions>
+              <ExpandMore
+                expand={expanded}
+                onClick={handleExpandClick}
+                aria-expanded={expanded}
+                aria-label="show more"
+              >
+                <ExpandMoreIcon />
+              </ExpandMore>
+              <Collapse in={expanded} timeout="auto" unmountOnExit>
+                <CardContent>
+                  <Typography paragraph>Ingredients : {data.ingredients} </Typography>
+                  <Typography variant='body1' paragraph>Instructions:</Typography>
+                  <Typography paragraph>
+                    {data.instructions}
+                  </Typography>
+                </CardContent>
+              </Collapse>
             </Card>
             </Grid>
-            
           )
         })}
       </Grid>

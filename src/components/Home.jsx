@@ -33,7 +33,7 @@ const Home = () => {
     })
   },[])  //variable in the dependency array will run the hook everytime the variable changes
 
-  const deleteStudent = (id)=>{
+  const deleteRecipe = (id)=>{
     console.log(id)
     axios.delete('http://localhost:3004/remove/'+id).then((response)=>{
     console.log(response);
@@ -74,7 +74,7 @@ const Home = () => {
                   user._id == data.userid ?(
                     <CardActions>
                       <Button id ="editButton" onClick={()=>{clickUpdate(data)}} variant="contained" size="small">Edit</Button>
-                      <Button size="small" onClick={()=>{deleteStudent(data._id)}} variant="contained" id="deleteButton">Delete</Button>
+                      <Button size="small" onClick={()=>{deleteRecipe(data._id)}} variant="contained" id="deleteButton">Delete</Button>
                     </CardActions>
                   ):null
               ):null}
@@ -89,7 +89,7 @@ const Home = () => {
               <Collapse in={expanded} timeout="auto" unmountOnExit>
                 <CardContent>
                   <Typography paragraph>Ingredients : {data.ingredients} </Typography>
-                  <Typography paragraph>Instructions:</Typography>
+                  <Typography variant='body1' paragraph>Instructions:</Typography>
                   <Typography paragraph>
                     {data.instructions}
                   </Typography>

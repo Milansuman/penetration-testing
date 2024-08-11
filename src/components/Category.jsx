@@ -1,10 +1,29 @@
-import { Box,ListItem,ListItemButton,ListItemIcon,ListItemText,List,Card, CardContent, CardMedia, Grid, Typography } from '@mui/material'
+import {CardActions,Button,Collapse,Box,IconButton,ListItem,ListItemButton,ListItemIcon,ListItemText,List,Card, CardContent, CardMedia, Grid, Typography } from '@mui/material'
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import { styled } from '@mui/material/styles';
+import { useNavigate } from 'react-router-dom';
+import { UserProvider, useUser } from './UserContext';
+
+
+const ExpandMore = styled((props) => {
+  const { expand, ...other } = props;
+  return <IconButton {...other} />;
+})(({ theme, expand }) => ({
+  transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
+  marginLeft: 'auto',
+  transition: theme.transitions.create('transform', {
+    duration: theme.transitions.duration.shortest,
+  }),
+}));
 
 const Category = () => {
+  const {user} = useUser();
+  var navigate = useNavigate();
   var[categories, setCategories] = useState([])
+  const [expanded, setExpanded] = useState(false);
   var[recipe, setRecipe] = useState([])
   var [filteredRecipes, setFilteredRecipes] = useState([]);
   useEffect (()=>{
@@ -16,6 +35,16 @@ const Category = () => {
     })
   },[])
 
+  const deleteRecipe = (id)=>{
+    console.log(id)
+    axios.delete('http://localhost:3004/remove/'+id).then((response)=>{
+    console.log(response);
+    window.location.reload(true);
+    }).catch((error)=>{
+      console.log(error);
+    })
+  }
+
   useEffect (()=>{
     var newCategories = Array.from(new Set(recipe.map(val => val.categories)));
     setCategories(newCategories)
@@ -24,6 +53,15 @@ const Category = () => {
 
   const filterRecipes = (selectedCategory)=>{
     setFilteredRecipes(recipe.filter(data => data.categories.includes(selectedCategory)));
+  }
+
+  const handleExpandClick = () => {
+    setExpanded(!expanded);
+  };
+
+  const clickUpdate = (data)=>{
+    navigate('/add', {state :{val : data}})
+    console.log(data);
   }
 
   const showRecipe = (
@@ -41,20 +79,69 @@ const Category = () => {
                 <Typography variant="h5" component="div">
                   {data.recipeName}
                 </Typography>
-                <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                  {data.instructions}
-                </Typography>
                 <Typography variant="body2">
-                  Ingredients : {data.ingredients}<br/>
                   Categories : {data.categories}
                 </Typography>
               </CardContent>
+              {user ?(
+                  user._id == data.userid ?(
+                    <CardActions>
+                      <Button id ="editButton" onClick={()=>{clickUpdate(data)}} variant="contained" size="small">Edit</Button>
+                      <Button size="small" onClick={()=>{deleteRecipe(data._id)}} variant="contained" id="deleteButton">Delete</Button>
+                    </CardActions>
+                  ):null
+              ):null}
+              <ExpandMore
+                expand={expanded}
+                onClick={handleExpandClick}
+                aria-expanded={expanded}
+                aria-label="show more"
+              >
+                <ExpandMoreIcon />
+              </ExpandMore>
+              <Collapse in={expanded} timeout="auto" unmountOnExit>
+                <CardContent>
+                  <Typography paragraph>Ingredients : {data.ingredients} </Typography>
+                  <Typography variant='body1' paragraph>Instructions:</Typography>
+                  <Typography paragraph>
+                    {data.instructions}
+                  </Typography>
+                </CardContent>
+              </Collapse>
             </Card>
             </Grid>
-            
           )
         })}
       </Grid>
+
+    // <Grid justifyContent={"flex-start"} container spacing={2}>
+    //     {filteredRecipes.map((data)=>{
+    //       return(
+    //         <Grid key = {data.id} item xs={6} md={3}>
+    //           <Card sx={{flexGrow:1}}>
+    //           <CardMedia
+    //             sx={{ height: 140 }}
+    //             image={data.img}
+    //             title={data.recipename}
+    //           />
+    //           <CardContent>
+    //             <Typography variant="h5" component="div">
+    //               {data.recipeName}
+    //             </Typography>
+    //             <Typography sx={{ mb: 1.5 }} color="text.secondary">
+    //               {data.instructions}
+    //             </Typography>
+    //             <Typography variant="body2">
+    //               Ingredients : {data.ingredients}<br/>
+    //               Categories : {data.categories}
+    //             </Typography>
+    //           </CardContent>
+    //         </Card>
+    //         </Grid>
+            
+    //       )
+    //     })}
+    //   </Grid>
   )
   
   return (
