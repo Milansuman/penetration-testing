@@ -89,7 +89,7 @@ const Home = () => {
               </ExpandMore>
               <Collapse in={expanded} timeout="auto" unmountOnExit>
                 <CardContent>
-                  <Typography paragraph>Method:</Typography>
+                  <Typography paragraph>Instructions:</Typography>
                   <Typography paragraph>
                     {data.instructions}
                   </Typography>
