@@ -59,19 +59,24 @@ const Add = () => {
                 },
               }}
         >
-        <Paper style={{paddingTop:'2%', overflow:'auto'}} elevation={3}>
+        <Paper class='MuiPaper-root' style={{paddingTop:'2%', overflow:'auto'}} elevation={3}>
         <Typography align="center" style={{textDecorationThickness:'10%'}} variant="h3">Add Recipe</Typography>
         <Grid style={{paddingTop:'3%'}} justifyContent={"center"} container spacing={2}>
         <Grid name = 'user' value = {(user.username)} item xs={8} md={6}>
-            <TextField required fullWidth variant='outlined' label='Name of the Recipe' 
+            <TextField sx={{'& .MuiInputBase-input': {color: '#ffffff' },'& .MuiFormLabel-root': {color: '#C3C3C3'}}}
+            required fullWidth variant='outlined' label='Name of the Recipe' 
             onChange={inputHandler} name ='recipeName' value = {(recipe.recipeName)}/> <br /> <br />
-            <TextField multiline required fullWidth variant='outlined' label='Ingredients'
+            <TextField sx={{'& .MuiInputBase-input': {color: '#ffffff' },'& .MuiFormLabel-root': {color: '#C3C3C3'}}}
+            multiline required fullWidth variant='outlined' label='Ingredients'
             onChange={inputHandler} name='ingredients' value = {(recipe.ingredients)}/> <br /> <br />
-            <TextField multiline required fullWidth variant='outlined' label='Recipe Instructions'
+            <TextField sx={{'& .MuiInputBase-input': {color: '#ffffff' },'& .MuiFormLabel-root': {color: '#C3C3C3'}}}
+            multiline required fullWidth variant='outlined' label='Recipe Instructions'
             onChange={inputHandler} name='instructions' value = {(recipe.instructions)}/><br /> <br />
-            <TextField required fullWidth variant='outlined' type="url" label='Image'
+            <TextField sx={{'& .MuiInputBase-input': {color: '#ffffff' },'& .MuiFormLabel-root': {color: '#C3C3C3'}}}
+            required fullWidth variant='outlined' type="url" label='Image'
             onChange={inputHandler} name='img' value = {(recipe.img)}/><br /> <br />
-            <TextField required fullWidth variant='outlined' type="outlined" label='categories'
+            <TextField sx={{'& .MuiInputBase-input': {color: '#ffffff' },'& .MuiFormLabel-root': {color: '#C3C3C3'}}}
+            required fullWidth variant='outlined' type="outlined" label='categories'
             onChange={inputHandler} name='categories' value = {(recipe.categories)}/><br /> <br />
             <Button style={{marginTop:'.5%'} }fullWidth id ='submitButton' variant="contained" onClick={submit}>Submit</Button>
         </Grid>

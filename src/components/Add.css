@@ -1,3 +1,45 @@
 .divadd{
     margin-top: 10%;
 }
+
+.TextFieldAdd{
+    color: #e0e0e0;
+}
+
+/* General styles */
+body {
+    background-color: #121212; /* Dark background for the page */
+    color: #e0e0e0; /* Light text color */
+    font-family: Arial, sans-serif;
+  }
+  
+  
+  /* Paper component styles */
+  .MuiPaper-root {
+    background-color: #1e1e1e; /* Dark background for the Paper */
+    color: #e0e0e0; /* Light text color inside the Paper */
+  }
+  
+  /* TextField styles */
+  .TextieldAdd {
+    background-color: #333;
+    color: #e0e0e0;
+  }
+  
+  .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline {
+    border-color: #444; 
+  }
+  
+  .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+    border-color: #666; 
+  }
+  
+  /* Button styles */
+  #submitButton {
+    background-color: #006ad5;
+    color: #262323;
+  }
+  
+  #submitButton:hover {
+    background-color: #006fdd93; /* Slightly lighter button background on hover */
+  }

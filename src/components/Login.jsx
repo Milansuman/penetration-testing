@@ -7,6 +7,8 @@ import axios from 'axios';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import { useUser } from './UserContext';
+import './Login.css'
+
 const Login = () => {
   var navigate = useNavigate();
   var [iconState, setIcon] = useState(false)
@@ -67,13 +69,15 @@ const Login = () => {
                 },
               }}
         >
-            <Paper elevation={3}>
+            <Paper class='MuiPaper-root' elevation={3}>
                 <Grid style={{padding:'10%'}} align={'center'}>
                     <Avatar style={{backgroundColor:'gray'}}> <AccountCircleIcon/></Avatar>
                     <Typography variant='h4'>Login</Typography> <br /> <br />
-                    <TextField fullWidth variant='outlined' label='Username' 
+                    <TextField sx={{'& .MuiInputBase-input': {color: '#ffffff' },'& .MuiFormLabel-root': {color: '#C3C3C3'}}}
+                    fullWidth variant='outlined' label='Username' 
                     onChange={inputHandler} name ='username' value = {(usr.username)}/>  <br /> <br />
-                    <TextField fullWidth inputProps={{type:iconState ? "text" : "password"}}  variant='outlined' label='Password' 
+                    <TextField sx={{'& .MuiInputBase-input': {color: '#ffffff' },'& .MuiFormLabel-root': {color: '#C3C3C3'}}}
+                    fullWidth inputProps={{type:iconState ? "text" : "password"}}  variant='outlined' label='Password' 
                     onChange={inputHandler} error={error} helperText = {helperText} name ='password' InputProps={{
                       endAdornment:<InputAdornment position="end"><Button onClick={
                         ()=>{

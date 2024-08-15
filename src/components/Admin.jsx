@@ -23,6 +23,7 @@ import GroupIcon from '@mui/icons-material/Group';
 import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
 import { useUser } from './UserContext';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import { Delete, DeleteRounded, Edit } from '@mui/icons-material';
 
 
 const ExpandMore = styled((props) => {
@@ -112,21 +113,21 @@ const Admin = () => {
         {usrs.map((data)=>{
           return(
             <Grid key = {data._id} item xs={6} md={3}>
-              <Card sx={{flexGrow:1}}>
+              <Card class='MuiCard-root' sx={{flexGrow:1}}>
               <CardContent>
-                <Typography variant="h5" component="div">
-                  {data.fName}
+                <Typography class='MuiTypography-h5' variant="h5" component="div">
+                  First Name : {data.fName}
                 </Typography>
-                <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                  {data.lName}
+                <Typography class='MuiTypography-h5' sx={{ mb: 1.5 }} color="text.secondary">
+                  Last Name : {data.lName}
                 </Typography>
-                <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                  {data.username}
+                <Typography class='MuiTypography-h5' sx={{ mb: 1.5 }} color="text.secondary">
+                  Username : {data.username}
                 </Typography>
               </CardContent>
               <CardActions>
-                <Button size="small" onClick={()=>{deleteUsr(data._id)}} variant="contained" id="deleteButton">Delete</Button>
-                <Button size="small" onClick={()=>{navigate('/profile',{state:{val:data._id}})}} variant="contained" id="editButton">Edit</Button>
+                <IconButton size="small" onClick={()=>{deleteUsr(data._id)}} variant="contained" id="deleteButton"><Delete/></IconButton>
+                <IconButton size="small" onClick={()=>{navigate('/profile',{state:{val:data._id}})}} variant="contained" id="editButton"><Edit/></IconButton>
               </CardActions>
             </Card>
             </Grid>
@@ -140,31 +141,31 @@ const Admin = () => {
         {recipe.map((data)=>{
           return(
             <Grid key = {data.id} item xs={6} md={3}>
-              <Card sx={{flexGrow:1}}>
+              <Card class='MuiCard-root' sx={{flexGrow:1}}>
               <CardMedia
                 sx={{ height: 140 }}
                 image={data.img}
                 title={data.recipename}
               />
               <CardContent>
-                <Typography variant="h5" component="div">
+                <Typography class='MuiTypography-h5' variant="h5" component="div">
                   {data.recipeName}
                 </Typography>
-                <Typography variant="body2">
-                  Categories : {data.categories}
+                <Typography class='MuiTypography-body2' variant="body2">
+                  Category : {data.categories}
                 </Typography>
               </CardContent>
-                  <CardActions>
-                    <Button size="small" onClick={()=>{deleteRecipe(data._id)}} variant="contained" id="deleteButton">Delete</Button>
-                  </CardActions>
+              <CardActions>
               <ExpandMore
-                expand={expanded}
-                onClick={handleExpandClick}
-                aria-expanded={expanded}
-                aria-label="show more"
-              >
-                <ExpandMoreIcon />
+                  expand={expanded}
+                  onClick={handleExpandClick}
+                  aria-expanded={expanded}
+                  aria-label="show more"
+                >
+                <ExpandMoreIcon id='expandMoreButton' />
               </ExpandMore>
+                    <IconButton size="small" onClick={()=>{deleteRecipe(data._id)}} variant="contained" id="deleteButton"><Delete/></IconButton>
+              </CardActions>
               <Collapse in={expanded} timeout="auto" unmountOnExit>
                 <CardContent>
                   <Typography paragraph>Ingredients : {data.ingredients} </Typography>
@@ -190,8 +191,8 @@ const Admin = () => {
         {['Users', 'Recipes'].map((text, index) => (
           <ListItem key={text} disablePadding>
             <ListItemButton onClick={() => handleListItemClick(index)}>
-              <ListItemIcon>
-                {index % 2 === 0 ? <GroupIcon /> : <FormatListBulletedIcon/>}
+              <ListItemIcon class='ListItemIcon'>
+                {index % 2 === 0 ? <GroupIcon/> : <FormatListBulletedIcon/>}
               </ListItemIcon>
               <ListItemText primary={text} />
             </ListItemButton>

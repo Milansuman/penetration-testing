@@ -5,6 +5,7 @@ import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import axios from 'axios';
+import './Signup.css'
 
 const Signup = () => {
   var navigate = useNavigate();
@@ -50,20 +51,24 @@ const Signup = () => {
                 },
               }}
         >
-            <Paper elevation={3}>
+            <Paper class='MuiPaper-root' elevation={3}>
                 <Grid style={{padding:'10%'}} align={'center'}>
                     <Avatar style={{backgroundColor:'gray'}}> <PersonAddIcon/></Avatar>
                     <Typography variant='h4'>Sign Up</Typography> <br /> <br />
                     <form>
-                      <TextField fullWidth type='text' variant='outlined' label='First Name' 
+                      <TextField sx={{'& .MuiInputBase-input': {color: '#ffffff' },'& .MuiFormLabel-root': {color: '#C3C3C3'}}}
+                      fullWidth type='text' variant='outlined' label='First Name' 
                       onChange={inputHandler} name ='fName' value = {(usr.fName)}/> <br /> <br />
-                      <TextField fullWidth type='text' variant='outlined' label='Last Name' 
+                      <TextField sx={{'& .MuiInputBase-input': {color: '#ffffff' },'& .MuiFormLabel-root': {color: '#C3C3C3'}}}
+                      fullWidth type='text' variant='outlined' label='Last Name' 
                       onChange={inputHandler} name ='lName' value = {(usr.lName)}/> <br /> <br />
-                      <TextField fullWidth variant='outlined' label='Username' 
+                      <TextField sx={{'& .MuiInputBase-input': {color: '#ffffff' },'& .MuiFormLabel-root': {color: '#C3C3C3'}}}
+                      fullWidth variant='outlined' label='Username' 
                       onChange={inputHandler} name ='username' value = {(usr.username)}/>  <br /> <br />
-                      <TextField fullWidth type='password' variant='outlined' label='Password' 
+                      <TextField sx={{'& .MuiInputBase-input': {color: '#ffffff' },'& .MuiFormLabel-root': {color: '#C3C3C3'}}}
+                      fullWidth type='password' variant='outlined' label='Password' 
                       onChange={inputHandler} name ='password' value = {(usr.password)}/> <br /> <br />
-                      <TextField
+                      <TextField sx={{'& .MuiInputBase-input': {color: '#ffffff' },'& .MuiFormLabel-root': {color: '#C3C3C3'}}}
                         label="Confirm Password"
                         type="password"
                         value={confirmPassword}

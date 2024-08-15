@@ -7,6 +7,8 @@ import { useNavigate } from 'react-router-dom';
 import './Home.css'
 import { UserProvider, useUser } from './UserContext';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import EditIcon from '@mui/icons-material/Edit';
+import { Delete, Edit } from '@mui/icons-material';
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -56,36 +58,38 @@ const Home = () => {
         {recipe.map((data)=>{
           return(
             <Grid key = {data.id} item xs={6} md={3}>
-              <Card sx={{flexGrow:1}}>
-              <CardMedia
+              <Card class='MuiCard-root' sx={{flexGrow:1}}>
+              <CardMedia 
                 sx={{ height: 140 }}
                 image={data.img}
                 title={data.recipename}
               />
               <CardContent>
-                <Typography variant="h5" component="div">
+                <Typography class='MuiTypography-h5' variant="h5" component="div">
                   {data.recipeName}
                 </Typography>
-                <Typography variant="body2">
-                  Categories : {data.categories}
+                <Typography class='MuiTypography-body2' variant="body2">
+                  Category : {data.categories}
                 </Typography>
               </CardContent>
-              {user ?(
-                  user._id == data.userid ?(
-                    <CardActions>
-                      <Button id ="editButton" onClick={()=>{clickUpdate(data)}} variant="contained" size="small">Edit</Button>
-                      <Button size="small" onClick={()=>{deleteRecipe(data._id)}} variant="contained" id="deleteButton">Delete</Button>
-                    </CardActions>
-                  ):null
-              ):null}
-              <ExpandMore
+              <CardActions>
+              <ExpandMore id='expandMoreButton'
                 expand={expanded}
                 onClick={handleExpandClick}
                 aria-expanded={expanded}
                 aria-label="show more"
               >
-                <ExpandMoreIcon />
+              <ExpandMoreIcon />
               </ExpandMore>
+              {user ?(
+                  user._id == data.userid ?(
+                    <CardActions>
+                      <IconButton  id ="editButton" onClick={()=>{clickUpdate(data)}} variant="contained" size="small"><Edit/></IconButton>
+                      <IconButton  size="small" onClick={()=>{deleteRecipe(data._id)}} variant="contained" id="deleteButton"><Delete/></IconButton>
+                    </CardActions>
+                  ):null
+              ):null}
+              </CardActions>
               <Collapse in={expanded} timeout="auto" unmountOnExit>
                 <CardContent>
                   <Typography paragraph>Ingredients : {data.ingredients} </Typography>

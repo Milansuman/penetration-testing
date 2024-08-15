@@ -68,15 +68,19 @@ const Profile = () => {
                 <Typography style={{paddingTop:'10%',fontWeight:'20px'}} variant='h2'>Profile</Typography> <br /> <br />
                 {/* <Avatar style={{backgroundColor:'gray'}}> <PersonAddIcon/></Avatar> */}
                 <form>
-                    <TextField fullWidth type='text' variant='outlined' label='First Name' 
+                    <TextField sx={{'& .MuiInputBase-input': {color: '#ffffff' },'& .MuiFormLabel-root': {color: '#C3C3C3'}}}
+                    fullWidth type='text' variant='outlined' label='First Name' 
                     onChange={inputHandler} name ='fName' value = {(user.fName)}/> <br /> <br />
-                    <TextField fullWidth type='text' variant='outlined' label='Last Name' 
+                    <TextField sx={{'& .MuiInputBase-input': {color: '#ffffff' },'& .MuiFormLabel-root': {color: '#C3C3C3'}}}
+                    fullWidth type='text' variant='outlined' label='Last Name' 
                     onChange={inputHandler} name ='lName' value = {(user.lName)}/> <br /> <br />
-                    <TextField fullWidth variant='outlined' label='Username' 
+                    <TextField sx={{'& .MuiInputBase-input': {color: '#ffffff' },'& .MuiFormLabel-root': {color: '#C3C3C3'}}}
+                    fullWidth variant='outlined' label='Username' 
                     onChange={inputHandler} name ='username' value = {(user.username)}/>  <br /> <br />
-                    <TextField fullWidth type='password' variant='outlined' label='Password' 
+                    <TextField sx={{'& .MuiInputBase-input': {color: '#ffffff' },'& .MuiFormLabel-root': {color: '#C3C3C3'}}}
+                    fullWidth type='password' variant='outlined' label='Password' 
                     onChange={inputHandler} name ='password' value = {(user.password)}/> <br /> <br />
-                    <TextField
+                    <TextField sx={{'& .MuiInputBase-input': {color: '#ffffff' },'& .MuiFormLabel-root': {color: '#C3C3C3'}}}
                     label="Confirm Password"
                     type="password"
                     value={confirmPassword}

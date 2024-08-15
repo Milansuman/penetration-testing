@@ -55,8 +55,6 @@ app.put('/profileedit/:id',async(req,res)=>{
 
 app.post('/login',async(req,res)=>{
     var {username , password} = req.body;
-    console.log(username)
-    console.log(password)
     try {
         var usr =await logmodel.findOne({username});
         if(!usr){
@@ -110,7 +108,6 @@ app.delete('/remove/:id',async(req,res)=>{
 });
 app.delete('/removeuser/:id',async(req,res)=>{
     var id=req.params.id
-    console.log(id)
     try {
         await logmodel.findByIdAndDelete(id);
         res.send("Deleted sucessfully")

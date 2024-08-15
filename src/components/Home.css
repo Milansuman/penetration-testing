@@ -1,3 +1,59 @@
 #homeBackground{
     margin-top: 7%;
 }
+/* General styles */
+body {
+  background-color: #121212; /* Dark background */
+  color: #e0e0e0; /* Light text color */
+  font-family: Arial, sans-serif;
+}
+
+/* Home container background */
+#homeBackground {
+  padding: 20px;
+}
+
+/* Card styles */
+.MuiCard-root {
+  background-color: #1e1e1e; /* Dark card background */
+  color: #e0e0e0; /* Light text color inside the card */
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Dark shadow for better contrast */
+}
+
+/* Card media styles */
+.MuiCardMedia-root {
+  border-bottom: 1px solid #333; /* Slightly lighter border for separation */
+}
+
+/* Typography styles */
+.MuiTypography-h5 {
+  color: #ffffff; /* White color for headings */
+}
+
+.MuiTypography-body2 {
+  color: #b0b0b0; /* Light gray color for body text */
+}
+
+/* ExpandMore button styles */
+.MuiIconButton-root {
+  color: #ffffff; /* White color for icons */
+}
+
+
+
+.MuiButton-root:hover {
+  background-color: #444; /* Slightly lighter button background on hover */
+}
+
+#expandMoreButton{
+    color: #e0e0e0; /* Color for expand icon */
+}
+
+#editButton {
+  color: #f39c12; /* Color for edit icon */
+}
+
+#deleteButton {
+  color: #e74c3c; /* Color for delete icon */
+}
