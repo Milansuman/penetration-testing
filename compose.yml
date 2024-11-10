@@ -1,0 +1,13 @@
+name: penetration-testing-app
+
+services:
+  frontend:
+    build: .
+    restart: always
+    ports:
+      - 4173:4173
+  backend:
+    build: ./backend
+    restart: always
+    ports:
+      - 3004:3004

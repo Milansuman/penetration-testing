@@ -1,3 +1,12 @@
+# Setup
+
+Make sure docker and docker compose is installed on your machine. Then run 
+```sh
+docker-compose up
+```
+
+and access the website at http://localhost:4173
+
 # React + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
